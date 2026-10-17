@@ -1,0 +1,24 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import Page from '../layouts/Page.astro';
+
+export async function getStaticPaths() {
+	// "home" and "about" already have their own dedicated files (index.astro,
+	// about.astro) mapping to fixed URLs, and "blog" is taken by the blog
+	// listing — skip those here so routes don't collide.
+	const RESERVED_SLUGS = new Set(['home', 'about', 'blog']);
+	const pages = await getCollection('pages');
+	return pages
+		.filter((page) => !RESERVED_SLUGS.has(page.id))
+		.map((page) => ({ params: { slug: page.id }, props: page }));
+}
+
+type Props = CollectionEntry<'pages'>;
+
+const page = Astro.props;
+const { Content } = await render(page);
+---
+
+<Page title={page.data.title}>
+	<Content />
+</Page>
