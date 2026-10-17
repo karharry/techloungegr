@@ -18,4 +18,12 @@ const blog = defineCollection({
 	}),
 });
 
-export const collections = { blog };
+const pages = defineCollection({
+	// Standalone pages (e.g. About) edited through the CMS as single files.
+	loader: glob({ base: './src/content/pages', pattern: '**/*.md' }),
+	schema: z.object({
+		title: z.string(),
+	}),
+});
+
+export const collections = { blog, pages };

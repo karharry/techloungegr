@@ -1,18 +1,34 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import { getEntry, render } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+
+const entry = await getEntry('pages', 'about');
+const { Content } = await render(entry!);
 ---
 
-<Layout
-	title="About"
-	description="About Tech Lounge"
-	pubDate={new Date('January 1 2026')}
->
-	<p>
-		Welcome to Tech Lounge — a place for tech news, tips, and thoughts.
-	</p>
-	<p>
-		Replace this text with your own "About" page. You can edit it directly here in
-		<code>src/pages/about.astro</code>, or rewrite it as a regular blog post through the
-		<code>/admin</code> editor instead.
-	</p>
-</Layout>
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={entry!.data.title} description="About Tech Lounge" />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="prose">
+				<h1>{entry!.data.title}</h1>
+				<Content />
+			</div>
+		</main>
+		<Footer />
+		<style>
+			.prose {
+				width: 720px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 3em 1em;
+			}
+		</style>
+	</body>
+</html>

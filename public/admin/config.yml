@@ -19,3 +19,13 @@ collections:
       - { label: 'Updated Date', name: 'updatedDate', widget: 'datetime', required: false }
       - { label: 'Hero Image', name: 'heroImage', widget: 'image', required: false }
       - { label: 'Body', name: 'body', widget: 'markdown' }
+
+  - name: 'pages'
+    label: 'Pages'
+    files:
+      - label: 'About Page'
+        name: 'about'
+        file: 'src/content/pages/about.md'
+        fields:
+          - { label: 'Title', name: 'title', widget: 'string' }
+          - { label: 'Body', name: 'body', widget: 'markdown' }
