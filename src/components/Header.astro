@@ -1,6 +1,14 @@
 ---
+import { getCollection } from 'astro:content';
 import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
+
+// "Home" and "Blog" are always shown; any other page gets a nav link
+// only if its "Show in navigation menu" checkbox is on in the CMS.
+const pages = await getCollection('pages');
+const navPages = pages
+	.filter((page) => page.id !== 'home' && page.data.showInNav)
+	.sort((a, b) => a.data.title.localeCompare(b.data.title));
 ---
 
 <header>
@@ -11,7 +19,9 @@ import HeaderLink from './HeaderLink.astro';
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
+			{navPages.map((page) => (
+				<HeaderLink href={`/${page.id}`}>{page.data.title}</HeaderLink>
+			))}
 		</div>
 	</nav>
 </header>

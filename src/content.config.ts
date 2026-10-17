@@ -23,6 +23,8 @@ const pages = defineCollection({
 	loader: glob({ base: './src/content/pages', pattern: '**/*.md' }),
 	schema: z.object({
 		title: z.string(),
+		// Whether this page gets a link in the site header nav.
+		showInNav: z.boolean().default(false),
 	}),
 });
 

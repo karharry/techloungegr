@@ -27,4 +27,10 @@ collections:
     slug: '{{slug}}'
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
+      - {
+          label: 'Show in navigation menu',
+          name: 'showInNav',
+          widget: 'boolean',
+          default: false,
+        }
       - { label: 'Body', name: 'body', widget: 'markdown' }
