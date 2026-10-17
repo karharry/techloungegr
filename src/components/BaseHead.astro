@@ -50,3 +50,11 @@ const { title, description, image = FallbackImage } = Astro.props;
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
+
+<!--
+  Netlify Identity widget, loaded site-wide (not just on /admin).
+  Invite and password-recovery emails link to the site root, and this
+  widget is what detects the #invite_token / #recovery_token in the URL
+  and pops up the "set your password" modal.
+-->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js" is:inline></script>
