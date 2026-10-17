@@ -22,3 +22,9 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# host-local backup/sync tooling (debian-server specific paths), not site content
+/backup.sh
+/sync.sh
+/backup.log
+/sync.log
